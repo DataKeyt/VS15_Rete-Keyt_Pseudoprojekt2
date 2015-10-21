@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html;charset=Windows-1252">
+    <body>
+<script type="text/javascript">
+    var fruits, asc1 = 1,
+            asc2 = 1,
+            asc3 = 1;
+            asc4 = 1;
+            asc5 = 1;
+    window.onload = function () {
+        fruits = document.getElementById("fruits");
+    }
+
+    function sort_table(tbody, col, asc) {
+        var rows = tbody.rows,
+                rlen = rows.length,
+                arr = new Array(),
+                i, j, cells, clen;
+        // fill the array with values from the table
+        for (i = 0; i < rlen; i++) {
+            cells = rows[i].cells;
+            clen = cells.length;
+            arr[i] = new Array();
+            for (j = 0; j < clen; j++) {
+                arr[i][j] = cells[j].innerHTML;
+            }
+        }
+        // sort the array by the specified column number (col) and order (asc)
+        arr.sort(function (a, b) {
+            return (a[col] == b[col]) ? 0 : ((a[col] > b[col]) ? asc : -1 * asc);
+        });
+        // replace existing rows with new rows created from the sorted array
+        for (i = 0; i < rlen; i++) {
+            rows[i].innerHTML = "<td>" + arr[i].join("</td><td>") + "</td>";
+        }
+    }
+</script>
+<style type="text/css">
+    table {
+        border-collapse: collapse;
+        border: none;
+    }
+    th,
+    td {
+        border: 1px solid black;
+        padding: 4px 16px;
+        font-family: Times New Roman;
+        font-size: 24px;
+        text-align: left;
+    }
+    th {
+        background-color: #C8C8C8;
+        cursor: pointer;
+    }
+</style>
+</head>
+<table>
+    <thead>
+    <tr>
+        <th onclick="sort_table(fruits, 0, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;">Name</th>
+        <th onclick="sort_table(fruits, 1, asc2); asc2 *= -1; asc3 = 1; asc1 = 1;">Colour</th>
+        <th onclick="sort_table(fruits, 2, asc3); asc3 *= -1; asc1 = 1; asc2 = 1;">Vitamins</th>
+        <th onclick="sort_table(fruits, 3, asc4); asc4 *= -1; asc3 = 1; asc1 = 1;">Taste</th>
+        <th onclick="sort_table(fruits, 4, asc5); asc5 *= -1; asc2 = 1; asc3 = 1;">Usage</th>
+    </tr>
+    </thead>
+    <tbody id="fruits">
+    <tr>
+        <td>Orange</td>
+        <td>Orange</td>
+        <td>C</td>
+        <td>Sour</td>
+        <td>Juice</td>
+    </tr>
+    <tr>
+        <td>Tangerine</td>
+        <td>Orange</td>
+        <td>C, B-1t</td>
+        <td>Sweet-ish</td>
+        <td>Christmas "food"</td>
+    </tr>
+    <tr>
+        <td>Watermelon</td>
+        <td>Green</td>
+        <td>A, B6</td>
+        <td>Sweet</td>
+        <td>Food</td>
+    </tr>
+    <tr>
+        <td>Lemon</td>
+        <td>Yellow</td>
+        <td>B, C</td>
+        <td>Sour</td>
+        <td>In drinks</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
